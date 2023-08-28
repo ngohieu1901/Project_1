@@ -38,8 +38,9 @@ public class FragBookmark extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        list = FileADAPTER.getList_bookmark();
-        adapter = new FileADAPTER(getContext(),list);
+
+        list = FileADAPTER.guidata();
+        adapter = new FileADAPTER(getContext(),list,2);
 
         rc_bookmark = view.findViewById(R.id.rc_bookmark);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,55 +22,67 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.DTO.FileDTO;
+import com.example.project_1.FRAGMENT.FragHome;
+import com.example.project_1.MainManageFile;
 import com.example.project_1.R;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> implements Filterable {
     Context context;
-    ArrayList<FileDTO> list;
+   static ArrayList<FileDTO> list;
     ArrayList<FileDTO> list_file_old;
-    static ArrayList<FileDTO> list_bookmark;
+    //  sử dụng phân vùng sự kiện giữa 2 tab
+    public int trang = 0;
+    //  boolean isButtonSelected = false;
+    FragHome fragHome;
+    String TAG = "ok";
 
-//    boolean isButtonSelected = false;
-
-
-
-    public FileADAPTER(Context context, ArrayList<FileDTO> list) {
+    public FileADAPTER(Context context, ArrayList<FileDTO> list, int trang) {
         this.context = context;
         this.list = list;
         this.list_file_old = list;
-        list_bookmark = new ArrayList<>();
+        this.trang = trang;
+        fragHome = new FragHome();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_file,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_file, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        FileDTO fileDTO = list.get(position);
+        final FileDTO[] fileDTO = {list.get(position)};
+        holder.img_icon_file.setImageResource(fileDTO[0].getHinh());
+        holder.tv_ten_file.setText(fileDTO[0].getTen());
+        holder.tv_ngay.setText(fileDTO[0].getNgay());
 
-        holder.img_icon_file.setImageResource(list.get(position).getHinh());
-        holder.tv_ten_file.setText(list.get(position).getTen());
-        holder.tv_ngay.setText(list.get(position).getNgay());
+        if (fileDTO[0].getBookMarl() == 0) {
+            holder.bookmark_file.setImageResource(R.drawable.star);
+        } else {
+            holder.bookmark_file.setImageResource(R.drawable.star_gold);
+        }
 
         holder.menu_custom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopupMenu(holder.menu_custom);
             }
-            private void showPopupMenu(View view){
+
+            private void showPopupMenu(View view) {
                 Context wrapper = new ContextThemeWrapper(context, R.style.PopupMenuStyle);
-                PopupMenu popupMenu = new PopupMenu(wrapper,view);
+                PopupMenu popupMenu = new PopupMenu(wrapper, view);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
@@ -77,8 +90,8 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId() == R.id.rename) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                            View v  = inflater.inflate(R.layout.dialog_rename,null);
+                            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                            View v = inflater.inflate(R.layout.dialog_rename, null);
                             builder.setView(v);
                             Dialog dialog = builder.create();
                             dialog.show();
@@ -107,13 +120,13 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             });
                             return true;
                         } else if (item.getItemId() == R.id.bookmark) {
-                            list_bookmark.add(fileDTO);
-                            holder.bookmark_file.setBackgroundResource(R.drawable.star_gold);
+                            fileDTO[0].setBookMarl(1);
+                            holder.bookmark_file.setImageResource(R.drawable.star_gold);
                             return true;
                         } else if (item.getItemId() == R.id.delete) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                            View v  = inflater.inflate(R.layout.dialog_delete,null);
+                            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                            View v = inflater.inflate(R.layout.dialog_delete, null);
                             builder.setView(v);
                             Dialog dialog = builder.create();
                             dialog.show();
@@ -137,7 +150,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                                 }
                             });
                             return true;
-                        }else {
+                        } else {
                             return false;
                         }
                     }
@@ -146,72 +159,127 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             }
         });
 //bookmark
-        if(list_bookmark.contains(fileDTO)){
-            holder.bookmark_file.setBackgroundResource(R.drawable.star_gold);
-        }else{
-            holder.bookmark_file.setBackgroundResource(R.drawable.star);
-        }
+//        if(list_bookmark.contains(fileDTO)){
+//            fileDTO.setBookMarl(1);
+//            list_bookmark.add(fileDTO);
+//            holder.bookmark_file.setImageResource(R.drawable.star_gold);
+//        }else{
+//            fileDTO.setBookMarl(0);
+//            list_bookmark.remove(fileDTO);
+//            holder.bookmark_file.setImageResource(R.drawable.star);
+//        }
         holder.bookmark_file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  if (list_bookmark.contains(fileDTO)){
-                      list_bookmark.remove(fileDTO);
-                      holder.bookmark_file.setBackgroundResource(R.drawable.star);
-                  }else{
-                      list_bookmark.add(fileDTO);
-                      holder.bookmark_file.setBackgroundResource(R.drawable.star_gold);
-                  }
+                fileDTO[0] = list.get(position);
+                int so = fileDTO[0].getBookMarl();
+                if (trang == 1) {
+                    xuLyChonHOME(fileDTO[0], so);
+                } else {
+                    xuLyChonBOOKMARK(fileDTO[0], so);
+
+                }
+                Log.e(TAG, "Check " + position);
+            }
+
+            private void xuLyChonBOOKMARK(FileDTO dto, int so) {
+                ArrayList<FileDTO> list1 = doc();
+
+                if (so == 0) {
+
+                    dto.setBookMarl(1);
+
+                    list1.set(check(list1,dto), dto);
+                    holder.bookmark_file.setImageResource(R.drawable.star_gold);
+                    so = 1;
+                    luudata(list1);
+                } else {
+                    dto.setBookMarl(0);
+                    list1.set(check(list1,dto), dto);
+                    holder.bookmark_file.setImageResource(R.drawable.star);
+                    so = 0;
+                    luudata(list1);
+                }
+            }
+            private int check(ArrayList<FileDTO> list,FileDTO dto){
+                int a=0;
+                for (FileDTO d : list){
+                    if(dto.getTen().equals(d.getTen())){
+                        break;
+                    }
+                        a++;
+                }
+                return a;
+            }
+
+            private void xuLyChonHOME(FileDTO dto, int so) {
+                if (so == 0) {
+                    dto.setBookMarl(1);
+                    list.set(position, dto);
+                    holder.bookmark_file.setImageResource(R.drawable.star_gold);
+                    so = 1;
+                    luudata(list);
+
+                } else {
+                    dto.setBookMarl(0);
+                    list.set(position, dto);
+                    holder.bookmark_file.setImageResource(R.drawable.star);
+                    so = 0;
+                    luudata(list);
+                }
             }
         });
     }
 
-    public static ArrayList<FileDTO> getList_bookmark(){
-        return list_bookmark;
-    }
+
+
 
 
     @Override
     public int getItemCount() {
         return list.size();
+
+
     }
 
 
     @Override
     public Filter getFilter() {
-            return new Filter() {
-                @Override
-                protected FilterResults performFiltering(CharSequence constraint) {
-                    String strSearch = constraint.toString();
-                    if (strSearch.isEmpty()){
-                        list = list_file_old;
-                    }else {
-                        ArrayList<FileDTO> list_new = new ArrayList<>();
-                        for(FileDTO file : list_file_old){
-                            if (file.getTen().toLowerCase().contains(strSearch.toLowerCase())){
-                                list_new.add(file);
-                            }
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()) {
+                    list = list_file_old;
+                } else {
+                    ArrayList<FileDTO> list_new = new ArrayList<>();
+                    for (FileDTO file : list_file_old) {
+                        if (file.getTen().toLowerCase().contains(strSearch.toLowerCase())) {
+                            list_new.add(file);
                         }
-                        list = list_new;
                     }
-                    FilterResults results = new FilterResults();
-                    results.values = list;
-                    return results;
+                    list = list_new;
                 }
+                FilterResults results = new FilterResults();
+                results.values = list;
+                return results;
+            }
 
-                @Override
-                protected void publishResults(CharSequence constraint, FilterResults results) {
-                    list = (ArrayList<FileDTO>) results.values;
-                    notifyDataSetChanged();
-                }
-            };
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list = (ArrayList<FileDTO>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img_icon_file;
         TextView tv_ten_file;
         TextView tv_ngay;
-        ImageButton bookmark_file;
+        ImageView bookmark_file;
         ImageButton menu_custom;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img_icon_file = itemView.findViewById(R.id.img_icon);
@@ -220,5 +288,51 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             bookmark_file = itemView.findViewById(R.id.bookmark_file);
             menu_custom = itemView.findViewById(R.id.menu_custom);
         }
+    }
+
+    public void luudata(ArrayList<FileDTO> list) {
+
+        try {
+            FileOutputStream fileOutputStream = ((Activity) context).openFileOutput("KEY_NAME", ((Activity) context).MODE_PRIVATE);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(list);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (Exception e) {
+
+            Log.e(TAG, "luudata: ", e);
+        }
+    }
+
+    public ArrayList doc() {
+        ArrayList<FileDTO> list = new ArrayList<>();
+        try {
+            FileInputStream fileInputStream = ((Activity) context).openFileInput("KEY_NAME");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            list = (ArrayList<FileDTO>) objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (Exception e) {
+
+            Log.e(TAG, "doc: ", e);
+        }
+        return list;
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+        super.onViewRecycled(holder);
+
+    }
+
+    public static ArrayList<FileDTO> guidata() {
+        ArrayList<FileDTO> list_bookmark =new ArrayList<>();
+        for (FileDTO dto : list){
+            if(dto.getBookMarl()==1){
+                list_bookmark.add(dto);
+            }
+        }
+
+        return list_bookmark;
     }
 }

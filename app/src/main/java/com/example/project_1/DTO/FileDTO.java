@@ -1,9 +1,20 @@
 package com.example.project_1.DTO;
 
-public class FileDTO {
+import java.io.Serializable;
+
+public class FileDTO implements Serializable {
     int hinh;
     String ten;
     String ngay;
+    // thêm thuộc tính bookmark để nhận lưu lựa chọn
+    int bookMarl;
+
+    public FileDTO(int hinh, String ten, String ngay, int bookMarl) {
+        this.hinh = hinh;
+        this.ten = ten;
+        this.ngay = ngay;
+        this.bookMarl = bookMarl;
+    }
 
     public FileDTO(int hinh, String ten, String ngay) {
         this.hinh = hinh;
@@ -36,5 +47,13 @@ public class FileDTO {
 
     public void setNgay(String ngay) {
         this.ngay = ngay;
+    }
+
+    public int getBookMarl() {
+        return bookMarl;
+    }
+
+    public void setBookMarl(int bookMarl) {
+        this.bookMarl = bookMarl;
     }
 }

@@ -38,11 +38,11 @@
         android:layout_marginRight="16dp"
         >
 
-        <ImageButton
+        <ImageView
             android:id="@+id/bookmark_file"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/star"
+            android:src="@drawable/star"
             />
         <ImageButton
             android:layout_width="30dp"

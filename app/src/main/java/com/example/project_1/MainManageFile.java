@@ -6,21 +6,32 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
+import com.example.project_1.DTO.FileDTO;
 import com.example.project_1.FRAGMENT.FragBookmark;
 import com.example.project_1.FRAGMENT.FragHome;
 import com.example.project_1.FRAGMENT.FragSetting;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainManageFile extends AppCompatActivity {
 FragmentManager manager;
 FragHome fragHome;
 FragBookmark fragBookmark;
 FragSetting fragSetting;
+    String TAG="ok";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,5 +60,6 @@ FragSetting fragSetting;
             }
         });
     }
+
 
 }
