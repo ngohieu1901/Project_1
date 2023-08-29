@@ -192,6 +192,8 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                 } else {
                     dto.setBookMarl(0);
                     list1.set(check(list1, dto), dto);
+                    list.remove(position);
+                    notifyDataSetChanged();
                     holder.bookmark_file.setImageResource(R.drawable.star);
                     so = 0;
                     luudata(list1);

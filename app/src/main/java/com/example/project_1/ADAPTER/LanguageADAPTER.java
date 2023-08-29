@@ -1,16 +1,11 @@
 package com.example.project_1.ADAPTER;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -48,7 +43,7 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
         holder.img_hinh.setImageResource(list_lang.get(position).getHinh());
         holder.tv_ten.setText(list_lang.get(position).getTen());
 
-        holder.frameLayout.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 row_index = position;
@@ -58,10 +53,10 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
         });
         holder.radioButton.setChecked(position == selectedPosition);
         if(row_index == position){
-            holder.frameLayout.setBackgroundColor(Color.parseColor("#217346"));
+            holder.layout.setBackgroundColor(Color.parseColor("#217346"));
             holder.tv_ten.setTextColor(Color.parseColor("#FFFFFF"));
         }else{
-            holder.frameLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.layout.setBackgroundColor(Color.parseColor("#ffffff"));
             holder.tv_ten.setTextColor(Color.parseColor("#000000"));
         }
     }
@@ -76,7 +71,7 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
         TextView tv_ten;
         ImageView img_hinh;
         CardView cardView;
-        FrameLayout frameLayout;
+        LinearLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,7 +79,7 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
             tv_ten = itemView.findViewById(R.id.tv_ten);
             img_hinh = itemView.findViewById(R.id.img_hinh);
             cardView =itemView.findViewById(R.id.row_linear);
-            frameLayout = itemView.findViewById(R.id.frame_1);
+            layout = itemView.findViewById(R.id.frame_1);
         }
     }
 }

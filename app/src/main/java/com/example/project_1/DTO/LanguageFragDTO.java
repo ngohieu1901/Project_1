@@ -1,6 +1,7 @@
 package com.example.project_1.DTO;
 
 public class LanguageFragDTO {
+    int anh;
     String ten;
 
     public LanguageFragDTO(String ten) {

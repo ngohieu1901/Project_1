@@ -28,7 +28,7 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_frag_lang,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_frag_lang,parent,false);
         return new ViewHolder(view);
     }
 
