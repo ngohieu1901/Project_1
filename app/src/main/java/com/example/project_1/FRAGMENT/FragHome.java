@@ -74,6 +74,12 @@ public class FragHome extends Fragment {
             list.add(new FileDTO(R.drawable.excel_icon,"678.excel","2022-05-06, 12:22:30 PM",0));
             list.add(new FileDTO(R.drawable.csv_icon,"891.csv","2022-05-06, 12:22:30 PM",1));
             list.add(new FileDTO(R.drawable.word_icon,"773.docx","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.excel_icon,"678.excel","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.csv_icon,"891.csv","2022-05-06, 12:22:30 PM",1));
+            list.add(new FileDTO(R.drawable.word_icon,"773.docx","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.excel_icon,"678.excel","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.csv_icon,"891.csv","2022-05-06, 12:22:30 PM",1));
+            list.add(new FileDTO(R.drawable.word_icon,"773.docx","2022-05-06, 12:22:30 PM",0));
            luudata(list);
         }
 
@@ -176,7 +182,6 @@ public class FragHome extends Fragment {
             objectOutputStream.close();
             fileOutputStream.close();
         }catch (Exception e){
-
             Log.e(TAG, "luudata: ",e );
         }
     }
@@ -189,7 +194,6 @@ public class FragHome extends Fragment {
             objectInputStream.close();
             fileInputStream.close();
         }catch (Exception e){
-
             Log.e(TAG, "doc: ",e );
         }
         return list;

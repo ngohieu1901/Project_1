@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> implements Filterable {
     Context context;
-   static ArrayList<FileDTO> list;
+    static ArrayList<FileDTO> list;
     ArrayList<FileDTO> list_file_old;
     //  sử dụng phân vùng sự kiện giữa 2 tab
     public int trang = 0;
@@ -177,37 +177,34 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                     xuLyChonHOME(fileDTO[0], so);
                 } else {
                     xuLyChonBOOKMARK(fileDTO[0], so);
-
                 }
                 Log.e(TAG, "Check " + position);
             }
 
             private void xuLyChonBOOKMARK(FileDTO dto, int so) {
                 ArrayList<FileDTO> list1 = doc();
-
                 if (so == 0) {
-
                     dto.setBookMarl(1);
-
-                    list1.set(check(list1,dto), dto);
+                    list1.set(check(list1, dto), dto);
                     holder.bookmark_file.setImageResource(R.drawable.star_gold);
                     so = 1;
                     luudata(list1);
                 } else {
                     dto.setBookMarl(0);
-                    list1.set(check(list1,dto), dto);
+                    list1.set(check(list1, dto), dto);
                     holder.bookmark_file.setImageResource(R.drawable.star);
                     so = 0;
                     luudata(list1);
                 }
             }
-            private int check(ArrayList<FileDTO> list,FileDTO dto){
-                int a=0;
-                for (FileDTO d : list){
-                    if(dto.getTen().equals(d.getTen())){
+
+            private int check(ArrayList<FileDTO> list, FileDTO dto) {
+                int a = 0;
+                for (FileDTO d : list) {
+                    if (dto.getTen().equals(d.getTen())) {
                         break;
                     }
-                        a++;
+                    a++;
                 }
                 return a;
             }
@@ -219,7 +216,6 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                     holder.bookmark_file.setImageResource(R.drawable.star_gold);
                     so = 1;
                     luudata(list);
-
                 } else {
                     dto.setBookMarl(0);
                     list.set(position, dto);
@@ -232,14 +228,9 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
     }
 
 
-
-
-
     @Override
     public int getItemCount() {
         return list.size();
-
-
     }
 
 
@@ -291,7 +282,6 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
     }
 
     public void luudata(ArrayList<FileDTO> list) {
-
         try {
             FileOutputStream fileOutputStream = ((Activity) context).openFileOutput("KEY_NAME", ((Activity) context).MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -299,7 +289,6 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             objectOutputStream.close();
             fileOutputStream.close();
         } catch (Exception e) {
-
             Log.e(TAG, "luudata: ", e);
         }
     }
@@ -313,7 +302,6 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             objectInputStream.close();
             fileInputStream.close();
         } catch (Exception e) {
-
             Log.e(TAG, "doc: ", e);
         }
         return list;
@@ -322,17 +310,15 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
     @Override
     public void onViewRecycled(@NonNull ViewHolder holder) {
         super.onViewRecycled(holder);
-
     }
 
     public static ArrayList<FileDTO> guidata() {
-        ArrayList<FileDTO> list_bookmark =new ArrayList<>();
-        for (FileDTO dto : list){
-            if(dto.getBookMarl()==1){
+        ArrayList<FileDTO> list_bookmark = new ArrayList<>();
+        for (FileDTO dto : list) {
+            if (dto.getBookMarl() == 1) {
                 list_bookmark.add(dto);
             }
         }
-
         return list_bookmark;
     }
 }
