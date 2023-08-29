@@ -1,10 +1,11 @@
 package com.example.project_1.DTO;
 
 public class LanguageFragDTO {
-    int anh;
+    private Boolean isSelected;
     String ten;
 
-    public LanguageFragDTO(String ten) {
+    public LanguageFragDTO(Boolean isSelected, String ten) {
+        this.isSelected = isSelected;
         this.ten = ten;
     }
 
@@ -14,5 +15,13 @@ public class LanguageFragDTO {
 
     public void setTen(String ten) {
         this.ten = ten;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

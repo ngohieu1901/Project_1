@@ -65,21 +65,21 @@ public class FragHome extends Fragment {
             list= (ArrayList<FileDTO>) doc();
         }
         if(list.size()==0){
-            list.add(new FileDTO(R.drawable.txt_icon,"555.txt","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.pdf_icon,"996.pdf","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.csv_icon,"452.csv","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.excel_icon,"345.excel","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.ppt_icon,"123.ppt","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.txt_icon,"365.txt","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.excel_icon,"678.excel","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.csv_icon,"891.csv","2022-05-06, 12:22:30 PM",1));
-            list.add(new FileDTO(R.drawable.word_icon,"773.docx","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.excel_icon,"678.excel","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.csv_icon,"891.csv","2022-05-06, 12:22:30 PM",1));
-            list.add(new FileDTO(R.drawable.word_icon,"773.docx","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.excel_icon,"678.excel","2022-05-06, 12:22:30 PM",0));
-            list.add(new FileDTO(R.drawable.csv_icon,"891.csv","2022-05-06, 12:22:30 PM",1));
-            list.add(new FileDTO(R.drawable.word_icon,"773.docx","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.txt_icon,"123.txt","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.pdf_icon,"234.pdf","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.csv_icon,"345.csv","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.excel_icon,"456.excel","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.ppt_icon,"567.ppt","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.txt_icon,"678.txt","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.excel_icon,"789.excel","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.csv_icon,"321.csv","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.word_icon,"432.docx","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.excel_icon,"543.excel","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.csv_icon,"654.csv","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.word_icon,"765.docx","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.excel_icon,"876.excel","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.csv_icon,"987.csv","2022-05-06, 12:22:30 PM",0));
+            list.add(new FileDTO(R.drawable.word_icon,"999.docx","2022-05-06, 12:22:30 PM",0));
            luudata(list);
         }
 
@@ -103,6 +103,8 @@ public class FragHome extends Fragment {
                 return true;
             }
         });
+
+
         sortFile = view.findViewById(R.id.sort_file_home);
         sortFile.setOnClickListener(new View.OnClickListener() {
             @Override

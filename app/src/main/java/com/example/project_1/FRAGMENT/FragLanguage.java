@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,16 +35,16 @@ public class FragLanguage extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         list = new ArrayList<>();
-        list.add(new LanguageFragDTO("English"));
-        list.add(new LanguageFragDTO("Korean"));
-        list.add(new LanguageFragDTO("Japanese"));
-        list.add(new LanguageFragDTO("French"));
-        list.add(new LanguageFragDTO("Hindi"));
-        list.add(new LanguageFragDTO("Portuguese"));
-        list.add(new LanguageFragDTO("Spanish"));
-        list.add(new LanguageFragDTO("Vietnamese"));
-        list.add(new LanguageFragDTO("Phillipinese"));
-        list.add(new LanguageFragDTO("German"));
+        list.add(new LanguageFragDTO(false,"English"));
+        list.add(new LanguageFragDTO(false,"Korean"));
+        list.add(new LanguageFragDTO(false,"Japanese"));
+        list.add(new LanguageFragDTO(false,"French"));
+        list.add(new LanguageFragDTO(false,"Hindi"));
+        list.add(new LanguageFragDTO(false,"Portuguese"));
+        list.add(new LanguageFragDTO(false,"Spanish"));
+        list.add(new LanguageFragDTO(false,"Vietnamese"));
+        list.add(new LanguageFragDTO(false,"Phillipinese"));
+        list.add(new LanguageFragDTO(false,"German"));
 
         rc_lang = view.findViewById(R.id.rc_lang);
         adapter = new LanguageFragADAPTER(getContext(),list);
@@ -60,5 +61,8 @@ public class FragLanguage extends Fragment {
                 fm.beginTransaction().replace(R.id.frag_container_file,fragSetting).commit();
             }
         });
+
+
+
     }
 }

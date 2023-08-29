@@ -64,6 +64,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final FileDTO[] fileDTO = {list.get(position)};
+
         holder.img_icon_file.setImageResource(fileDTO[0].getHinh());
         holder.tv_ten_file.setText(fileDTO[0].getTen());
         holder.tv_ngay.setText(fileDTO[0].getNgay());
@@ -99,6 +100,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             EditText ed_ten = v.findViewById(R.id.ed_ten);
                             Button btn_cancel = v.findViewById(R.id.btn_cancel);
                             Button btn_agree = v.findViewById(R.id.btn_agree);
+
                             FileDTO fileDTO = list.get(holder.getAdapterPosition());
 
                             ed_ten.setText(fileDTO.getTen());
@@ -107,6 +109,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                                 public void onClick(View v) {
                                     fileDTO.setTen(ed_ten.getText().toString());
                                     notifyDataSetChanged();
+                                    luudata(list);
                                     dialog.dismiss();
                                     Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
                                 }
@@ -122,6 +125,8 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                         } else if (item.getItemId() == R.id.bookmark) {
                             fileDTO[0].setBookMarl(1);
                             holder.bookmark_file.setImageResource(R.drawable.star_gold);
+                            notifyDataSetChanged();
+                            luudata(list);
                             return true;
                         } else if (item.getItemId() == R.id.delete) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -138,6 +143,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                                 public void onClick(View v) {
                                     list.remove(holder.getAdapterPosition());
                                     notifyDataSetChanged();
+                                    luudata(list);
                                     Toast.makeText(wrapper, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }
@@ -181,7 +187,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                 Log.e(TAG, "Check " + position);
             }
 
-            private void xuLyChonBOOKMARK(FileDTO dto, int so) {
+            public void xuLyChonBOOKMARK(FileDTO dto, int so) {
                 ArrayList<FileDTO> list1 = doc();
                 if (so == 0) {
                     dto.setBookMarl(1);
@@ -211,7 +217,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                 return a;
             }
 
-            private void xuLyChonHOME(FileDTO dto, int so) {
+            public void xuLyChonHOME(FileDTO dto, int so) {
                 if (so == 0) {
                     dto.setBookMarl(1);
                     list.set(position, dto);
