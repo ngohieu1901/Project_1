@@ -35,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> implements Filterable {
     Context context;
@@ -141,11 +142,28 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             btn_delete.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                   if(trang==1){
+                                       xoaHome();
+                                   }else {
+                                       xoaBookmark();
+                                   }
+                                    dialog.dismiss();
+                                }
+
+                                private void xoaBookmark() {
+                                    ArrayList<FileDTO> listMain = doc();
+                                    fileDTO[0]=list.get(position);
+                                    list.remove(position);
+                                    listMain.remove(check(listMain,fileDTO[0]));
+                                    luudata(listMain);
+                                    notifyDataSetChanged();
+                                }
+
+                                private void xoaHome() {
                                     list.remove(holder.getAdapterPosition());
                                     notifyDataSetChanged();
                                     luudata(list);
                                     Toast.makeText(wrapper, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
                                 }
                             });
 
@@ -206,16 +224,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                 }
             }
 
-            private int check(ArrayList<FileDTO> list, FileDTO dto) {
-                int a = 0;
-                for (FileDTO d : list) {
-                    if (dto.getTen().equals(d.getTen())) {
-                        break;
-                    }
-                    a++;
-                }
-                return a;
-            }
+
 
             public void xuLyChonHOME(FileDTO dto, int so) {
                 if (so == 0) {
@@ -328,5 +337,15 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             }
         }
         return list_bookmark;
+    }
+    private int check(ArrayList<FileDTO> list, FileDTO dto) {
+        int a = 0;
+        for (FileDTO d : list) {
+            if (dto.getTen().equals(d.getTen())) {
+                break;
+            }
+            a++;
+        }
+        return a;
     }
 }
