@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +35,7 @@ import java.util.ArrayList;
 
 public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> implements Filterable {
     Context context;
-    static ArrayList<FileDTO> list;
+    static ArrayList<FileDTO> list, list_bookmark;
     ArrayList<FileDTO> list_file_old;
     //  sử dụng phân vùng sự kiện giữa 2 tab
     public int trang = 0;
@@ -104,9 +103,29 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             btn_agree.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    if(trang==1){
+                                        suaHome();
+                                    }else {
+                                        suaBookmark();
+                                    }
+                                }
+
+                                private void suaHome(){
                                     fileDTO[0].setTen(ed_ten.getText().toString());
                                     notifyDataSetChanged();
                                     luudata(list);
+                                    dialog.dismiss();
+                                    Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                }
+
+                                private void suaBookmark(){
+                                    ArrayList<FileDTO> listMain = doc();
+                                    FileDTO fileDTO2 = list.get(position);
+                                    fileDTO[0] = list.get(position);
+                                    fileDTO[0].setTen(ed_ten.getText().toString());
+                                    listMain.set(check(listMain,fileDTO2),fileDTO[0]);
+                                    notifyDataSetChanged();
+                                    luudata(listMain);
                                     dialog.dismiss();
                                     Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
                                 }
@@ -126,7 +145,6 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             luudata(list);
                             return true;
                         } else if (item.getItemId() == R.id.delete) {
-
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
                             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                             View v = inflater.inflate(R.layout.dialog_delete, null);
@@ -163,8 +181,8 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                                     luudata(listMain);
                                     notifyDataSetChanged();
                                     dialog.dismiss();
-
                                 }
+
                             });
 
                             btn_cancel.setOnClickListener(new View.OnClickListener() {

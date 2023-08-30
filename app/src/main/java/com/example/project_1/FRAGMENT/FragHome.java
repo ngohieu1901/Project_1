@@ -100,6 +100,7 @@ public class FragHome extends Fragment {
 
         sortFile = view.findViewById(R.id.sort_file_home);
         sortFile.setOnClickListener(new View.OnClickListener() {
+            boolean isChecked = false;
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -117,20 +118,24 @@ public class FragHome extends Fragment {
                 TextView tv_az = view.findViewById(R.id.tv_az);
                 TextView tv_za = view.findViewById(R.id.tv_za);
 
+                check_az.setVisibility(View.INVISIBLE);
+                check_za.setVisibility(View.INVISIBLE);
 
+                tv_az.setTextColor(Color.parseColor("#FF000000"));
+                tv_za.setTextColor(Color.parseColor("#FF000000"));
 
                 layoutAZ.setOnClickListener(new View.OnClickListener() {
-                    private  boolean isChecked = false;
+
                     @Override
                     public void onClick(View v) {
-//                        if (isChecked){
-//                            tv_az.setTextColor(Color.parseColor("#217346"));
-//                            iv_az.setColorFilter(Color.parseColor("#217346"));
-//                        }else{
-//                            tv_az.setTextColor(Color.parseColor("#676767"));
-//                            iv_az.setColorFilter(Color.parseColor("#676767"));
-//                        }
-//                        isChecked =! isChecked;
+                        check_az.setVisibility(View.VISIBLE);
+                        check_za.setVisibility(View.INVISIBLE);
+
+                        iv_az.setImageResource(R.drawable.sort_az);
+                        tv_az.setTextColor(Color.parseColor("#217346"));
+
+                        iv_za.setImageResource(R.drawable.sort_az_white);
+                        tv_za.setTextColor(Color.parseColor("#FF000000"));
 
                         Collections.sort(list, new Comparator<FileDTO>() {
                             @Override
@@ -140,21 +145,29 @@ public class FragHome extends Fragment {
                         });
                         Toast.makeText(getContext(), "Sort AZ", Toast.LENGTH_SHORT).show();
                         adapter.notifyDataSetChanged();
-                        dialog.dismiss();
+
                     }
                 });
 
                 layoutZA.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        check_az.setVisibility(View.INVISIBLE);
+                        check_za.setVisibility(View.VISIBLE);
+
+                        iv_za.setImageResource(R.drawable.sort_az);
+                        tv_za.setTextColor(Color.parseColor("#217346"));
+
+                        iv_az.setImageResource(R.drawable.sort_az_white);
+                        tv_az.setTextColor(Color.parseColor("#FF000000"));
+
                         Collections.sort(list, new NameComparator());
                         adapter.notifyDataSetChanged();
                         Toast.makeText(getContext(), "Sort ZA", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+
                     }
                 });
             }
-
         });
     }
 
