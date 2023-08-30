@@ -120,8 +120,11 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
 
                                 private void suaBookmark(){
                                     ArrayList<FileDTO> listMain = doc();
-                                    FileDTO fileDTO2 = list.get(position);
+
                                     fileDTO[0] = list.get(position);
+                                    String ten = fileDTO[0].getTen();
+                                    FileDTO fileDTO2 = new FileDTO();
+                                    fileDTO2.setTen(ten);
                                     fileDTO[0].setTen(ed_ten.getText().toString());
                                     listMain.set(check(listMain,fileDTO2),fileDTO[0]);
                                     notifyDataSetChanged();
@@ -361,8 +364,11 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
         int a = 0;
         for (FileDTO d : list) {
             if (dto.getTen().equals(d.getTen())) {
+
                 break;
             }
+            Log.e(TAG, "check: d "+d.getTen() );
+            Log.e(TAG, "check: dto "+dto.getTen() );
             a++;
         }
         return a;
