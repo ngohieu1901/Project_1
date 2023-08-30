@@ -98,13 +98,13 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             Button btn_cancel = v.findViewById(R.id.btn_cancel);
                             Button btn_agree = v.findViewById(R.id.btn_agree);
 
-                            FileDTO fileDTO = list.get(holder.getAdapterPosition());
+                            final FileDTO[] fileDTO = {list.get(holder.getAdapterPosition())};
 
-                            ed_ten.setText(fileDTO.getTen());
+                            ed_ten.setText(fileDTO[0].getTen());
                             btn_agree.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    fileDTO.setTen(ed_ten.getText().toString());
+                                    fileDTO[0].setTen(ed_ten.getText().toString());
                                     notifyDataSetChanged();
                                     luudata(list);
                                     dialog.dismiss();
@@ -139,11 +139,31 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             btn_delete.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    if(trang==1){
+                                        xoaHome();
+                                    }else {
+                                        xoaBookmark();
+                                    }
+
+                                }
+
+                                private void xoaHome() {
                                     list.remove(holder.getAdapterPosition());
                                     notifyDataSetChanged();
                                     luudata(list);
                                     Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
+                                }
+
+                                private void xoaBookmark() {
+                                    ArrayList<FileDTO> listMain = doc();
+                                    fileDTO[0] = list.get(position);
+                                    list.remove(position);
+                                    listMain.remove(check(listMain,fileDTO[0]));
+                                    luudata(listMain);
+                                    notifyDataSetChanged();
+                                    dialog.dismiss();
+
                                 }
                             });
 
@@ -204,16 +224,6 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                 }
             }
 
-            private int check(ArrayList<FileDTO> list, FileDTO dto) {
-                int a = 0;
-                for (FileDTO d : list) {
-                    if (dto.getTen().equals(d.getTen())) {
-                        break;
-                    }
-                    a++;
-                }
-                return a;
-            }
 
             public void xuLyChonHOME(FileDTO dto, int so) {
                 if (so == 0) {
@@ -328,4 +338,16 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
         }
         return list_bookmark;
     }
+
+    private int check(ArrayList<FileDTO> list, FileDTO dto) {
+        int a = 0;
+        for (FileDTO d : list) {
+            if (dto.getTen().equals(d.getTen())) {
+                break;
+            }
+            a++;
+        }
+        return a;
+    }
+
 }
