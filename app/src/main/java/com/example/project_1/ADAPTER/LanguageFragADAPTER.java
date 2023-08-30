@@ -38,6 +38,7 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tv_ten.setText(list.get(position).getTen());
+
         if (position == selectedItem){
             holder.iv_check.setVisibility(View.VISIBLE);
         }else {

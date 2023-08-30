@@ -70,7 +70,6 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
         RadioButton radioButton;
         TextView tv_ten;
         ImageView img_hinh;
-        CardView cardView;
         LinearLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -78,7 +77,6 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
             radioButton = itemView.findViewById(R.id.rb_selected);
             tv_ten = itemView.findViewById(R.id.tv_ten);
             img_hinh = itemView.findViewById(R.id.img_hinh);
-            cardView =itemView.findViewById(R.id.row_linear);
             layout = itemView.findViewById(R.id.frame_1);
         }
     }

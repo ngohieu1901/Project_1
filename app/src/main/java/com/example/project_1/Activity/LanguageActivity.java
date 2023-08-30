@@ -10,14 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.project_1.ADAPTER.LanguageADAPTER;
 import com.example.project_1.DTO.LanguageDTO;
-import com.example.project_1.MainManageFile;
 import com.example.project_1.R;
 
 import java.util.ArrayList;
@@ -37,9 +33,9 @@ public class LanguageActivity extends AppCompatActivity {
         rc_lang = findViewById(R.id.rc_lang);
         list = new ArrayList<>();
         list.add(new LanguageDTO(R.drawable.anh,"English",false));
-        list.add(new LanguageDTO(R.drawable.tbn,"Spainish",false));
-        list.add(new LanguageDTO(R.drawable.bdn,"Portuguese",false));
-        list.add(new LanguageDTO(R.drawable.duc,"German",false));
+        list.add(new LanguageDTO(R.drawable.tbn_2,"Spainish",false));
+        list.add(new LanguageDTO(R.drawable.bdn_2,"Portuguese",false));
+        list.add(new LanguageDTO(R.drawable.duc_2,"German",false));
         list.add(new LanguageDTO(R.drawable.phap,"French",false));
 
         adapter = new LanguageADAPTER(this,list);
