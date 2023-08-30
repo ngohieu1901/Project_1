@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/rename"
         android:title="Rename"
-        android:icon="@drawable/rename_icon"/>
+        android:icon="@drawable/rename_icon"
+        app:showAsAction="always"/>
     <item android:id="@+id/bookmark"
         android:title="Bookmark"
-        android:icon="@drawable/bookmark_menu"/>
+        android:icon="@drawable/bookmark_menu"
+        app:showAsAction="always"/>
     <item android:id="@+id/delete"
+        app:showAsAction="always"
         android:title="Delete"
         android:icon="@drawable/delete_icon"/>
 </menu>

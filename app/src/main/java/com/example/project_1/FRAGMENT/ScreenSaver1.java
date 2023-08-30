@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.project_1.Activity.LanguageActivity;
 import com.example.project_1.R;
@@ -38,12 +39,12 @@ public class ScreenSaver1 extends Fragment {
             }
         });
         Button btn_next = view.findViewById(R.id.btn_next1);
+        ViewPager2 pager2 = getActivity().findViewById(R.id.pager_2);
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                screenSaver2 = new ScreenSaver2();
-                manager.beginTransaction().replace(R.id.frag_container_1,screenSaver2).commit();
+                int currentItem = pager2.getCurrentItem();
+                pager2.setCurrentItem(currentItem + 1);
             }
         });
 

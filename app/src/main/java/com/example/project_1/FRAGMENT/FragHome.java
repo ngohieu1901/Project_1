@@ -1,7 +1,6 @@
 package com.example.project_1.FRAGMENT;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,20 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.ADAPTER.FileADAPTER;
 import com.example.project_1.DTO.FileDTO;
-import com.example.project_1.MainActivity;
-import com.example.project_1.MainManageFile;
 import com.example.project_1.R;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class FragHome extends Fragment {
     RecyclerView rc_file;
@@ -82,7 +76,6 @@ public class FragHome extends Fragment {
             list.add(new FileDTO(R.drawable.word_icon,"999.docx","2022-05-06, 12:22:30 PM",0));
            luudata(list);
         }
-
 
         adapter = new FileADAPTER(getContext(),list,1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
@@ -130,14 +123,14 @@ public class FragHome extends Fragment {
                     private  boolean isChecked = false;
                     @Override
                     public void onClick(View v) {
-                        if (isChecked){
-                            tv_az.setTextColor(Color.parseColor("#217346"));
-                            iv_az.setColorFilter(Color.parseColor("#217346"));
-                        }else{
-                            tv_az.setTextColor(Color.parseColor("#676767"));
-                            iv_az.setColorFilter(Color.parseColor("#676767"));
-                        }
-                        isChecked =! isChecked;
+//                        if (isChecked){
+//                            tv_az.setTextColor(Color.parseColor("#217346"));
+//                            iv_az.setColorFilter(Color.parseColor("#217346"));
+//                        }else{
+//                            tv_az.setTextColor(Color.parseColor("#676767"));
+//                            iv_az.setColorFilter(Color.parseColor("#676767"));
+//                        }
+//                        isChecked =! isChecked;
 
                         Collections.sort(list, new Comparator<FileDTO>() {
                             @Override

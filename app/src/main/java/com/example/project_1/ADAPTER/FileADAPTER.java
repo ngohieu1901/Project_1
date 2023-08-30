@@ -22,12 +22,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.DTO.FileDTO;
 import com.example.project_1.FRAGMENT.FragHome;
-import com.example.project_1.MainManageFile;
 import com.example.project_1.R;
 
 import java.io.FileInputStream;
@@ -35,7 +33,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> implements Filterable {
     Context context;
@@ -83,11 +80,10 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             }
 
             private void showPopupMenu(View view) {
-                Context wrapper = new ContextThemeWrapper(context, R.style.PopupMenuStyle);
-                PopupMenu popupMenu = new PopupMenu(wrapper, view);
+
+                PopupMenu popupMenu = new PopupMenu(context, view);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId() == R.id.rename) {
@@ -130,6 +126,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             luudata(list);
                             return true;
                         } else if (item.getItemId() == R.id.delete) {
+
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
                             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                             View v = inflater.inflate(R.layout.dialog_delete, null);
@@ -142,28 +139,11 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                             btn_delete.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                   if(trang==1){
-                                       xoaHome();
-                                   }else {
-                                       xoaBookmark();
-                                   }
-                                    dialog.dismiss();
-                                }
-
-                                private void xoaBookmark() {
-                                    ArrayList<FileDTO> listMain = doc();
-                                    fileDTO[0]=list.get(position);
-                                    list.remove(position);
-                                    listMain.remove(check(listMain,fileDTO[0]));
-                                    luudata(listMain);
-                                    notifyDataSetChanged();
-                                }
-
-                                private void xoaHome() {
                                     list.remove(holder.getAdapterPosition());
                                     notifyDataSetChanged();
                                     luudata(list);
-                                    Toast.makeText(wrapper, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -224,7 +204,16 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
                 }
             }
 
-
+            private int check(ArrayList<FileDTO> list, FileDTO dto) {
+                int a = 0;
+                for (FileDTO d : list) {
+                    if (dto.getTen().equals(d.getTen())) {
+                        break;
+                    }
+                    a++;
+                }
+                return a;
+            }
 
             public void xuLyChonHOME(FileDTO dto, int so) {
                 if (so == 0) {
@@ -243,6 +232,7 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             }
         });
     }
+
 
 
     @Override
@@ -337,15 +327,5 @@ public class FileADAPTER extends RecyclerView.Adapter<FileADAPTER.ViewHolder> im
             }
         }
         return list_bookmark;
-    }
-    private int check(ArrayList<FileDTO> list, FileDTO dto) {
-        int a = 0;
-        for (FileDTO d : list) {
-            if (dto.getTen().equals(d.getTen())) {
-                break;
-            }
-            a++;
-        }
-        return a;
     }
 }

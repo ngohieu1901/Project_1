@@ -1,4 +1,4 @@
-package com.example.project_1;
+package com.example.project_1.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import com.example.project_1.DTO.FileDTO;
 import com.example.project_1.FRAGMENT.FragBookmark;
 import com.example.project_1.FRAGMENT.FragHome;
 import com.example.project_1.FRAGMENT.FragSetting;
+import com.example.project_1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.FileInputStream;
