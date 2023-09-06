@@ -1,5 +1,10 @@
 package com.example.project_1.FRAGMENT;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,25 +20,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.ADAPTER.LanguageFragADAPTER;
+import com.example.project_1.Activity.MainManageFile;
 import com.example.project_1.DTO.LanguageFragDTO;
+import com.example.project_1.ItemOnClick;
 import com.example.project_1.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FragLanguage extends Fragment {
     RecyclerView rc_lang;
+    SharedPreferences preferences;
     LanguageFragADAPTER adapter;
     List<LanguageFragDTO> list;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_language,container,false);
-    }
+        View view = inflater.inflate(R.layout.frag_language,container,false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         list = new ArrayList<>();
         list.add(new LanguageFragDTO(false,"English"));
         list.add(new LanguageFragDTO(false,"Korean"));
@@ -46,8 +51,21 @@ public class FragLanguage extends Fragment {
         list.add(new LanguageFragDTO(false,"Phillipinese"));
         list.add(new LanguageFragDTO(false,"German"));
 
-        rc_lang = view.findViewById(R.id.rc_lang);
         adapter = new LanguageFragADAPTER(getContext(),list);
+
+        preferences  = getActivity().getSharedPreferences("pref",Context.MODE_PRIVATE);
+        int selectedPosition = preferences.getInt("selected_position",-1);
+        if(selectedPosition != -1){
+            adapter.setSelectedItem(selectedPosition);
+        }
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        rc_lang = view.findViewById(R.id.rc_lang);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         rc_lang.setLayoutManager(linearLayoutManager);
         rc_lang.setAdapter(adapter);
@@ -56,13 +74,21 @@ public class FragLanguage extends Fragment {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                FragSetting fragSetting = new FragSetting();
-                fm.beginTransaction().replace(R.id.frag_container_file,fragSetting).commit();
+                Intent intent = new Intent(getActivity(), MainManageFile.class);
+                startActivity(intent);
+                getActivity().finish();
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                FragSetting fragSetting = new FragSetting();
+//                fm.beginTransaction().replace(R.id.frag_container_file,fragSetting).commit();
             }
         });
+    }
 
-
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("selected_position",adapter.getSelectedItem());
+        editor.apply();
     }
 }

@@ -6,7 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +17,13 @@ import android.widget.Toast;
 
 import com.example.project_1.ADAPTER.LanguageADAPTER;
 import com.example.project_1.DTO.LanguageDTO;
+import com.example.project_1.ItemOnClick;
 import com.example.project_1.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class LanguageActivity extends AppCompatActivity {
+public class LanguageActivity extends AppCompatActivity  {
     RecyclerView rc_lang;
     LanguageADAPTER adapter;
     ArrayList<LanguageDTO> list;
@@ -56,9 +61,10 @@ public class LanguageActivity extends AppCompatActivity {
         if(id == R.id.check){
             Intent intent = new Intent(LanguageActivity.this, MainManageFile.class);
             startActivity(intent);
-            Toast.makeText(this, "CHECKED", Toast.LENGTH_SHORT).show();
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

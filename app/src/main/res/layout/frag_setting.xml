@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#217346"
-        android:text="Settings"
+        android:text="@string/setting_frag"
         android:textSize="31sp"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -16,10 +16,28 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/setting_logo"
+        android:src="@drawable/logo_frag_setting"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="@string/tv_xlsx"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/tv_version"
+        android:textSize="13sp"
+        android:layout_marginBottom="5dp"/>
 
     <LinearLayout
         android:id="@+id/layout_lang"
@@ -44,14 +62,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Language"
+                android:text="@string/tv_lang"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Chose your language"
+                android:text="@string/tv_lang1"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -85,14 +103,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Share"
+                android:text="@string/tv_share"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Share this app for friend or family"
+                android:text="@string/tv_share1"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -123,17 +141,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Feedback"
-                android:textStyle="bold"
+                android:text="@string/tv_feedback"
                 android:textColor="@color/black"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Please give a feedback"
+                android:text="@string/tv_feedback1"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -167,14 +186,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="More app"
+                android:text="@string/tv_more"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="View our more app on google play"
+                android:text="@string/tv_feedback1"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -208,14 +227,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Privacy Policy"
+                android:text="@string/tv_privacy"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="View our privacy policy"
+                android:text="@string/tv_privacy1"
                 />
         </LinearLayout>
     </LinearLayout>

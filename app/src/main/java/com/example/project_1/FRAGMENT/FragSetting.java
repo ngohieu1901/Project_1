@@ -50,7 +50,7 @@ public class FragSetting extends Fragment {
                 btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "Sent", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getContext().getString(R.string.toast_sent), Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });

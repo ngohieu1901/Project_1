@@ -27,7 +27,7 @@
             android:id="@+id/tv_az"
             android:layout_width="150dp"
             android:layout_height="22dp"
-            android:text="Sort A -> Z"
+            android:text="@string/sortAZ_dialog"
             android:textSize="16sp"
             android:layout_marginRight="40dp"/>
         <ImageView
@@ -64,7 +64,7 @@
             android:id="@+id/tv_za"
             android:layout_width="150dp"
             android:layout_height="22dp"
-            android:text="Sort Z -> A"
+            android:text="@string/sortZA_dialog"
             android:textSize="16sp"
             android:layout_marginRight="40dp"/>
         <ImageView

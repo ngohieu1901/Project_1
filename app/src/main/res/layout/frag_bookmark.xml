@@ -14,7 +14,7 @@
             android:id="@+id/search_file_bm"
             android:layout_width="320dp"
             android:layout_height="50dp"
-            app:queryHint="Find the document..."
+            app:queryHint="@string/search_view_bookmark"
             android:background="@drawable/border_button"
             android:backgroundTint="#B9B9B9"/>
         <ImageButton

@@ -1,23 +1,31 @@
 package com.example.project_1.DTO;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
+@Entity(tableName = "tb_file")
+public class AllFileDTO {
 
-public class FileDTO implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    int id;
     int hinh;
     String ten;
     String ngay;
-    // thêm thuộc tính bookmark để nhận lưu lựa chọn
-    int bookMarl;
+    int bookmark;
 
-    public FileDTO(int hinh, String ten, String ngay, int bookMarl) {
+
+    public AllFileDTO(int hinh, String ten, String ngay, int bookmark) {
         this.hinh = hinh;
         this.ten = ten;
         this.ngay = ngay;
-        this.bookMarl = bookMarl;
+        this.bookmark = bookmark;
     }
 
+    public int getId() {
+        return id;
+    }
 
-    public FileDTO() {
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getHinh() {
@@ -44,11 +52,12 @@ public class FileDTO implements Serializable {
         this.ngay = ngay;
     }
 
-    public int getBookMarl() {
-        return bookMarl;
+
+    public int getBookmark() {
+        return bookmark;
     }
 
-    public void setBookMarl(int bookMarl) {
-        this.bookMarl = bookMarl;
+    public void setBookmark(int bookmark) {
+        this.bookmark = bookmark;
     }
 }

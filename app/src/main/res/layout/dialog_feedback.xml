@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="#217346"
-        android:text="Feedback"
+        android:text="@string/tv_feedback"
         android:textSize="25sp"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -22,13 +22,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Please send us some feedback"/>
+        android:text="@string/tv_feedback1"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/border_button"
         android:layout_margin="16dp"
-        android:hint="Write some feedback"
+        android:hint="@string/ed_dialog_feedback"
         android:paddingLeft="25dp"
         android:paddingBottom="40dp"
         android:textColorHint="#217346"/>
@@ -43,7 +43,7 @@
         <Button
             android:layout_width="128dp"
             android:layout_height="48dp"
-            android:text="Cancel"
+            android:text="@string/btn_cacel"
             android:background="@drawable/border_menu"
             android:backgroundTint="#00000000"
             android:id="@+id/btn_cancel"
@@ -55,7 +55,7 @@
             android:id="@+id/btn_send"
             android:layout_width="128dp"
             android:layout_height="48dp"
-            android:text="Send"
+            android:text="@string/btn_send"
             android:textColor="@color/white"
             android:background="@drawable/border_menu"
             android:backgroundTint="#217346"

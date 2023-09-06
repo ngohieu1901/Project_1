@@ -14,7 +14,7 @@
 
     <string name="search_view_home" > Find the document...</string>
     <string name="search_view_bookmark" > Find the document...</string>
-<!--    frag Setting-->
+    <!--    frag Setting-->
     <string name="setting_frag" > Setting </string>
     <string name="tv_xlsx" > XLSX READER &amp; EXCEL VIEWER </string>
     <string name="tv_version" > Version 1.1.1 </string>
@@ -29,15 +29,15 @@
     <string name="tv_more1" > View our more app on google play </string>
     <string name="tv_privacy" > Privacy Policy </string>
     <string name="tv_privacy1" > View our privacy policy </string>
-<!--frag Language-->
+    <!--frag Language-->
     <string name="tv_frag_lang" > Language </string>
-<!--dialog Feedback-->
+    <!--dialog Feedback-->
     <string name="dialog_feedback" > Feedback </string>
     <string name="tv_dialog_feedback" > Please send us some feedback </string>
     <string name="ed_dialog_feedback" > Write some feedback </string>
     <string name="btn_cacel" >  Cancel </string>
     <string name="btn_send" > Send </string>
-<!--    dialog Rename-->
+    <!--    dialog Rename-->
     <string name="tv_rename" > Rename </string>
     <string name="btn_agree" > AGREE </string>
     <!--dialog Delete-->
@@ -45,8 +45,7 @@
     <string name="tv_delete1" >Do you realy want to delete this file ? </string>
     <string name="btn_delete" >DELETE </string>
 
-
-<!--Toast-->
+    <!--Toast-->
     <string name="toast_sortAZ" > Sort A -> Z </string>
     <string name="toast_sortZA" > Sort Z -> A </string>
     <string name="toast_rename" > Fixed successfully </string>
@@ -54,4 +53,7 @@
     <string name="toast_bookmark"> Mark successfully </string>
     <string name="toast_sent"> Sent </string>
     <string name="toast_lang" > Language not supported yet</string>
+
+
+
 </resources>

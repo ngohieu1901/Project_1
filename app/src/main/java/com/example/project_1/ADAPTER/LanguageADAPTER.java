@@ -3,6 +3,7 @@ package com.example.project_1.ADAPTER;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_1.Activity.LanguageActivity;
 import com.example.project_1.DTO.LanguageDTO;
+import com.example.project_1.ItemOnClick;
+import com.example.project_1.LanguageStatic;
 import com.example.project_1.R;
 
 import java.util.ArrayList;
@@ -25,6 +30,7 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
     ArrayList<LanguageDTO> list_lang;
     int selectedPosition = -1;
     int row_index = -1;
+    ItemOnClick itemOnClick;
 
     public LanguageADAPTER(Context context, ArrayList<LanguageDTO> list_lang) {
         this.context = context;
@@ -46,12 +52,27 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("onClick", "onClick: " + position);
+                if (position == 0){
+                    LanguageStatic.setLanguage(v.getContext(),"en");
+                } else if(position == 1){
+                    LanguageStatic.setLanguage(v.getContext(), "sp");
+                } else if (position == 2) {
+                    Toast.makeText(context, "      Language not supported\nplease select another language", Toast.LENGTH_SHORT).show();
+                } else if (position == 3) {
+                    Toast.makeText(context, "      Language not supported\nplease select another language", Toast.LENGTH_SHORT).show();
+                }
+                else if (position == 4) {
+                    LanguageStatic.setLanguage(v.getContext(),"fr");
+                }
                 row_index = position;
                 selectedPosition = position;
                 notifyDataSetChanged();
             }
         });
+
         holder.radioButton.setChecked(position == selectedPosition);
+
         if(row_index == position){
             holder.layout.setBackgroundColor(Color.parseColor("#217346"));
             holder.tv_ten.setTextColor(Color.parseColor("#FFFFFF"));
@@ -60,6 +81,8 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
             holder.tv_ten.setTextColor(Color.parseColor("#000000"));
         }
     }
+
+
 
     @Override
     public int getItemCount() {

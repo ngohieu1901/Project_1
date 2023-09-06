@@ -2,17 +2,22 @@ package com.example.project_1.ADAPTER;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.DTO.LanguageFragDTO;
+import com.example.project_1.ItemOnClick;
+import com.example.project_1.LanguageStatic;
 import com.example.project_1.R;
 
 import java.util.ArrayList;
@@ -26,6 +31,14 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
     public LanguageFragADAPTER(Context context, List<LanguageFragDTO> list) {
         this.context = context;
         this.list = list;
+    }
+
+    public int getSelectedItem() {
+        return selectedItem;
+    }
+    public void setSelectedItem(int position){
+        selectedItem = position;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,9 +57,24 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
         }else {
             holder.iv_check.setVisibility(View.GONE);
         }
-        holder.card_lang.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("onClick", "onClick: " + position);
+                if (position == 0){
+                    LanguageStatic.setLanguage(context,"en");
+                }else if(position == 2){
+                    LanguageStatic.setLanguage(context,"jp");
+                }else if(position == 3){
+                    LanguageStatic.setLanguage(context,"fr");
+                }else if(position == 4){
+                    LanguageStatic.setLanguage(context,"hi");
+                } else if (position == 6) {
+                    LanguageStatic.setLanguage(context,"sp");
+                }else {
+                    Toast.makeText(context, context.getString(R.string.toast_lang), Toast.LENGTH_SHORT).show();
+                }
+
                 int preSelected = selectedItem;
                 selectedItem = position;
                 notifyItemChanged(preSelected);
@@ -64,13 +92,13 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
         TextView tv_ten;
         ImageView iv_check;
         CardView card_lang;
+        LinearLayout layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_ten = itemView.findViewById(R.id.tv_ten);
             iv_check = itemView.findViewById(R.id.iv_check);
             card_lang = itemView.findViewById(R.id.card_lang);
-
+            layout = itemView.findViewById(R.id.layout);
         }
-
     }
 }
