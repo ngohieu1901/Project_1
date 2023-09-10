@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="status_pdf"> #DD383E</color>
+    <color name="main_file">#217346</color>
+    <color name="language" > #217346 </color>
 </resources>

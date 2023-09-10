@@ -14,12 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project_1.Activity.LanguageActivity;
 import com.example.project_1.DTO.LanguageDTO;
-import com.example.project_1.ItemOnClick;
 import com.example.project_1.LanguageStatic;
 import com.example.project_1.R;
 
@@ -30,12 +27,12 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
     ArrayList<LanguageDTO> list_lang;
     int selectedPosition = -1;
     int row_index = -1;
-    ItemOnClick itemOnClick;
 
     public LanguageADAPTER(Context context, ArrayList<LanguageDTO> list_lang) {
         this.context = context;
         this.list_lang = list_lang;
     }
+
 
     @NonNull
     @Override
@@ -81,8 +78,6 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
             holder.tv_ten.setTextColor(Color.parseColor("#000000"));
         }
     }
-
-
 
     @Override
     public int getItemCount() {

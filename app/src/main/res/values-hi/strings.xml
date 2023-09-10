@@ -54,4 +54,6 @@
     <string name="toast_bookmark">  सफलतापूर्वक चिह्नित करें</string>
     <string name="toast_sent">  भेजा</string>
     <string name="toast_lang"> भाषा अभी समर्थित नहीं है</string>
+    <string name="toast_exists"> फ़ाइल मौजूद नहीं है </string>
+    <string name="toast_failed"> असफल </string>
 </resources>

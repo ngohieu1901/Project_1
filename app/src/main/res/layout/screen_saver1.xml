@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-    <TextView
-        android:id="@+id/tv_skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Skip"
-        android:textSize="18sp"
-        android:textColor="#6C6C6C"
-        android:layout_gravity="right"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="60dp"
-        />
+
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="322dp"
+        android:layout_height="273dp"
         android:src="@drawable/iconscv1"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="50dp"/>
@@ -38,15 +27,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:text="Our application can quickly read the excel \n document file you have."
-        android:layout_marginBottom="50dp"/>
-    <Button
-        android:id="@+id/btn_next1"
-        android:layout_width="380dp"
-        android:layout_height="48dp"
-        android:text="NEXT"
-        android:backgroundTint="#217346"
-        android:background="@drawable/border_button"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"/>
+    />
+
 
 </LinearLayout>

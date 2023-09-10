@@ -3,8 +3,6 @@ package com.example.project_1.FRAGMENT;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +11,17 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.ADAPTER.LanguageFragADAPTER;
 import com.example.project_1.Activity.MainManageFile;
 import com.example.project_1.DTO.LanguageFragDTO;
-import com.example.project_1.ItemOnClick;
 import com.example.project_1.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class FragLanguage extends Fragment {
     RecyclerView rc_lang;
@@ -77,9 +71,6 @@ public class FragLanguage extends Fragment {
                 Intent intent = new Intent(getActivity(), MainManageFile.class);
                 startActivity(intent);
                 getActivity().finish();
-//                FragmentManager fm = getActivity().getSupportFragmentManager();
-//                FragSetting fragSetting = new FragSetting();
-//                fm.beginTransaction().replace(R.id.frag_container_file,fragSetting).commit();
             }
         });
     }

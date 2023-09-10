@@ -53,5 +53,7 @@
     <string name="toast_bookmark">  Marcar con éxito</string>
     <string name="toast_sent">  Enviado</string>
     <string name="toast_lang" > Idioma no soportado todavía</string>
+    <string name="toast_exists"> El archivo no existe </string>
+    <string name="toast_failed"> Fallar </string>
 
 </resources>

@@ -26,21 +26,21 @@ public class ScreenSaver3 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btn_start = view.findViewById(R.id.btn_start);
-        TextView tv_skip = view.findViewById(R.id.tv_skip);
-        tv_skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LanguageActivity.class);
-                startActivity(intent);
-            }
-        });
-        btn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LanguageActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Button btn_start = view.findViewById(R.id.btn_start);
+//        TextView tv_skip = view.findViewById(R.id.tv_skip);
+//        tv_skip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), LanguageActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        btn_start.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), LanguageActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

@@ -16,11 +16,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.DTO.LanguageFragDTO;
-import com.example.project_1.ItemOnClick;
 import com.example.project_1.LanguageStatic;
 import com.example.project_1.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTER.ViewHolder>{
@@ -40,14 +38,12 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
         selectedItem = position;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_frag_lang,parent,false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tv_ten.setText(list.get(position).getTen());

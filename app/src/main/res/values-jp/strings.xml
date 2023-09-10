@@ -54,5 +54,7 @@
     <string name="toast_bookmark">  正常にマークされました</string>
     <string name="toast_sent">  送信済み</string>
     <string name="toast_lang" > 言語はまだサポートされていません</string>
+    <string name="toast_exists"> ファイルが存在しません </string>
+    <string name="toast_failed"> 失敗 </string>
 
 </resources>

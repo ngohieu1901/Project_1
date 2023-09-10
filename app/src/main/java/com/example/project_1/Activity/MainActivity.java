@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 Intent intent = new Intent(MainActivity.this, MainViewPager.class);
                 startActivity(intent);
+                finish();
             }
         }.start();
     }
+
 }

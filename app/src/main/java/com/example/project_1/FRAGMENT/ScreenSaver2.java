@@ -28,23 +28,8 @@ public class ScreenSaver2 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//                int currentItem = pager2.getCurrentItem();
+//                pager2.setCurrentItem(currentItem+1);
 
-        TextView tv_skip = view.findViewById(R.id.tv_skip);
-        tv_skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LanguageActivity.class);
-                startActivity(intent);
-            }
-        });
-        Button btn_next = view.findViewById(R.id.btn_next2);
-        ViewPager2 pager2 = getActivity().findViewById(R.id.pager_2);
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int currentItem = pager2.getCurrentItem();
-                pager2.setCurrentItem(currentItem+1);
-            }
-        });
     }
 }
