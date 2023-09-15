@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_1</string>
+    <string name="app_name">File Manager</string>
 
     <string name="home_menu" > Home </string>
     <string name="bookmark_menu" > Bookmark </string>
@@ -55,7 +55,16 @@
     <string name="toast_lang" > Language not supported yet</string>
     <string name="toast_exists"> File not exists </string>
     <string name="toast_failed"> Failed </string>
+<!--    Screen saver-->
+    <string name="sc1_tv1">Professional Excel Reader</string>
+    <string name="sc1_tv2">Our application can quickly read the excel \n document file you have.</string>
+    <string name="sc2_tv1">Manager Excel Tools</string>
+    <string name="sc2_tv2">Simple Excel file management tool, easy to use anywhere.</string>
+    <string name="sc3_tv1">Convenience for work</string>
+    <string name="sc3_tv2">Getting work done professionally doesn\'t mean you have to sit in front of your desktop all day.</string>
 
-
-
+    <!--    MainViewPager-->
+    <string name="tv_skip"> Skip </string>
+    <string name="btn_next"> Next</string>
+    <string name="btn_start"> Get Started </string>
 </resources>

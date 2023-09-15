@@ -47,8 +47,8 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tv_ten.setText(list.get(position).getTen());
-
-        if (position == selectedItem){
+        // kiểm tra position có được chọn hay không
+        if (position == selectedItem){// selectedItem = -1, nếu position được chọn -> hiển thị tv_CHECK
             holder.iv_check.setVisibility(View.VISIBLE);
         }else {
             holder.iv_check.setVisibility(View.GONE);
@@ -71,8 +71,8 @@ public class LanguageFragADAPTER extends RecyclerView.Adapter<LanguageFragADAPTE
                     Toast.makeText(context, context.getString(R.string.toast_lang), Toast.LENGTH_SHORT).show();
                 }
 
-                int preSelected = selectedItem;
-                selectedItem = position;
+                int preSelected = selectedItem;// Lưu vị trí được chọn trước đó
+                selectedItem = position;// Đặt lại vị trí được chọn = vị trí hiện tại
                 notifyItemChanged(preSelected);
                 notifyItemChanged(selectedItem);
             }

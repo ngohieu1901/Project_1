@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">प्रोजेक्ट_1</string>
+    <string name="app_name">पफ़ाइल मैनेजर</string>
 
     <string name="home_menu" >  घर</string>
     <string name="bookmark_menu" >  बुकमार्क</string>
@@ -56,4 +56,15 @@
     <string name="toast_lang"> भाषा अभी समर्थित नहीं है</string>
     <string name="toast_exists"> फ़ाइल मौजूद नहीं है </string>
     <string name="toast_failed"> असफल </string>
+<!--    Screen saver-->
+    <string name="sc1_tv1">प्रोफेशनल एक्सेल रीडर</string>
+    <string name="sc1_tv2">हमारा एप्लिकेशन आपके पास मौजूद एक्सेल \n दस्तावेज़ फ़ाइल को तुरंत पढ़ सकता है।</string>
+    <string name="sc2_tv1">प्रबंधक एक्सेल उपकरण</string>
+    <string name="sc2_tv2">सरल एक्सेल फ़ाइल प्रबंधन उपकरण, कहीं भी उपयोग में आसान।</string>
+    <string name="sc3_tv1">काम के लिए सुविधा</string>
+    <string name="sc3_tv2">पेशेवर तरीके से काम करने का मतलब यह नहीं है कि आपको पूरे दिन अपने डेस्कटॉप के सामने बैठना होगा।</string>
+    <!--    MainViewPager-->
+    <string name="tv_skip"> छोडना </string>
+    <string name="btn_next"> अगला</string>
+    <string name="btn_start"> शुरू हो जाओ </string>
 </resources>

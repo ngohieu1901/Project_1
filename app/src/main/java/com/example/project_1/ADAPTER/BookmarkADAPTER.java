@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -36,7 +37,7 @@ public class BookmarkADAPTER extends RecyclerView.Adapter<BookmarkADAPTER.ViewHo
     Context context;
     ArrayList<AllFileDTO> list_bookmark,list_home,list_file_old;
     HomeADAPTER adapter;
-
+    boolean isActivityOpen = false;
     public BookmarkADAPTER(Context context, ArrayList<AllFileDTO> list) {
         this.context = context;
         this.list_bookmark = list;
@@ -68,12 +69,21 @@ public class BookmarkADAPTER extends RecyclerView.Adapter<BookmarkADAPTER.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String path = list_bookmark.get(position).getPath();
-                String name = list_bookmark.get(position).getTen();
-                Intent intent = new Intent(context, PdfViewActivity.class);
-                intent.putExtra("path", path);
-                intent.putExtra("name",name);
-                context.startActivity(intent);
+                if (!isActivityOpen) {
+                    isActivityOpen = true;
+                    String path = list_bookmark.get(position).getPath();
+                    String name = list_bookmark.get(position).getTen();
+                    Intent intent = new Intent(context, PdfViewActivity.class);
+                    intent.putExtra("path", path);
+                    intent.putExtra("name", name);
+                    context.startActivity(intent);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            isActivityOpen = false;
+                        }
+                    }, 1000);
+                }
             }
         });
 
@@ -111,11 +121,11 @@ public class BookmarkADAPTER extends RecyclerView.Adapter<BookmarkADAPTER.ViewHo
 
                                     File oldFile = new File(path);
                                     Log.d("ZZZZZ","Path old: "+path);
-                                    File newFile = new File("/storage/emulated/0/File/"+ed_ten.getText().toString());
-                                    Log.d("ZZZZZ","Path new: "+ "/storage/emulated/0/File/"+ed_ten.getText().toString());
+                                    File newFile = new File("/storage/emulated/0/"+ed_ten.getText().toString());
+                                    Log.d("ZZZZZ","Path new: "+ "/storage/emulated/0/"+ed_ten.getText().toString());
 
                                     if (oldFile.exists()) {
-                                        boolean success = oldFile.renameTo(new File("/storage/emulated/0/File/"+ed_ten.getText().toString()));
+                                        boolean success = oldFile.renameTo(new File("/storage/emulated/0/"+ed_ten.getText().toString()));
                                         if (success) {
                                             int posHome = 0;
                                             for (int i = 0; i < list_home.size(); i++){
@@ -123,15 +133,16 @@ public class BookmarkADAPTER extends RecyclerView.Adapter<BookmarkADAPTER.ViewHo
                                                 if (fileHome.getPath().equals(path)){
                                                     posHome = i;
                                                     fileHome.setTen(ed_ten.getText().toString());
-                                                    fileHome.setPath("/storage/emulated/0/File/"+ed_ten.getText().toString());
+                                                    fileHome.setPath("/storage/emulated/0/"+ed_ten.getText().toString());
                                                     list_home.set(posHome,fileHome);
                                                     adapter.saveFile(list_home);
+                                                    adapter.notifyDataSetChanged();
                                                     break;
                                                 }
                                             }
 
                                             allFileDTO.setTen(ed_ten.getText().toString());
-                                            allFileDTO.setPath("/storage/emulated/0/File/"+ed_ten.getText().toString());
+                                            allFileDTO.setPath("/storage/emulated/0/"+ed_ten.getText().toString());
                                             FileDATABASE.getInstance(context).fileDAO().updateFile(allFileDTO);
                                             loadFile();
                                             Toast.makeText(context, context.getString(R.string.toast_rename), Toast.LENGTH_SHORT).show();

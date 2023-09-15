@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">プロジェクト_1</string>
+    <string name="app_name">ファイルマネージャー</string>
 
     <string name="home_menu" >  家</string>
     <string name="bookmark_menu" >  ブックマーク</string>
@@ -56,5 +56,15 @@
     <string name="toast_lang" > 言語はまだサポートされていません</string>
     <string name="toast_exists"> ファイルが存在しません </string>
     <string name="toast_failed"> 失敗 </string>
-
+<!--Screen saver-->
+    <string name="sc1_tv1">プロフェッショナル Excel リーダー</string>
+    <string name="sc1_tv2">私たちのアプリケーションは、あなたが持っている Excel ドキュメント ファイルを \n すばやく読み取ることができます。</string>
+    <string name="sc2_tv1">マネージャー Excel ツール</string>
+    <string name="sc2_tv2">シンプルな Excel ファイル管理ツールで、どこでも簡単に使用できます。</string>
+    <string name="sc3_tv1">仕事に便利</string>
+    <string name="sc3_tv2">プロフェッショナルに仕事をこなすということは、一日中デスクトップの前に座っていなければならないという意味ではありません。</string>
+    <!--    MainViewPager-->
+    <string name="tv_skip"> スキップ </string>
+    <string name="btn_next"> 次</string>
+    <string name="btn_start">始めましょう</string>
 </resources>

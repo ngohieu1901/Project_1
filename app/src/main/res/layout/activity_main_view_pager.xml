@@ -8,7 +8,7 @@
         android:id="@+id/tv_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skip"
+        android:text="@string/tv_skip"
         android:textSize="18sp"
         android:textColor="#6C6C6C"
         android:layout_gravity="right"
@@ -16,7 +16,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="60dp"
         />
-
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -24,9 +23,11 @@
         android:id="@+id/pager"/>
     <Button
         android:id="@+id/btn_next"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="NEXT"
+        android:text="@string/btn_next"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:backgroundTint="#217346"
         android:background="@drawable/border_button"
         android:layout_gravity="center_horizontal|bottom"

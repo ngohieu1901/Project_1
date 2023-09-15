@@ -1,7 +1,9 @@
 package com.example.project_1.FRAGMENT;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +17,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.project_1.BuildConfig;
 import com.example.project_1.R;
 
 public class FragSetting extends Fragment {
-    LinearLayout layout_feedback, layout_lang;
+    LinearLayout layout_feedback, layout_lang, layout_share;
+    boolean isSelected = false;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,6 +68,33 @@ public class FragSetting extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragLanguage fragLanguage = new FragLanguage();
                 fm.beginTransaction().replace(R.id.frag_container_file,fragLanguage).commit();
+            }
+        });
+
+        layout_share = view.findViewById(R.id.layout_share);
+        layout_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (!isSelected) {
+                        isSelected = true;
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "File Manager");
+                        String shareMessage = "\n\n" + "File management application\n";
+                        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=com.microsoft.office.excel&pcampaignid=web_share" + BuildConfig.APPLICATION_ID + "\n\n";
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                        startActivity(Intent.createChooser(shareIntent, "Choose one"));
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                isSelected = false;
+                            }
+                        }, 1000);
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

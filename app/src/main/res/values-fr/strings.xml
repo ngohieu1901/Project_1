@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Projet 1</string>
+    <string name="app_name"> Gestionnaire de fichiers</string>
 
     <string name="home_menu" > Maison </string>
     <string name="bookmark_menu" > Signet </string>
@@ -54,5 +54,15 @@
     <string name="toast_lang" > Langue pas encore prise en charge</string>
     <string name="toast_exists"> Le fichier n\'existe pas </string>
     <string name="toast_failed"> Échouer </string>
-
+<!--    Screen saver-->
+    <string name="sc1_tv1">Lecteur Excel professionnel</string>
+    <string name="sc1_tv2">Notre application peut lire rapidement le fichier de document Excel \n dont vous disposez.</string>
+    <string name="sc2_tv1">Outils Excel du gestionnaire</string>
+    <string name="sc2_tv2">Outil simple de gestion de fichiers Excel, facile à utiliser n’importe où.</string>
+    <string name="sc3_tv1">Commodité pour le travail</string>
+    <string name="sc3_tv2">Faire son travail de manière professionnelle ne signifie pas que vous devez rester assis devant votre bureau toute la journée.</string>
+<!--    MainViewPager-->
+    <string name="tv_skip"> Sauter </string>
+    <string name="btn_next"> Suivant</string>
+    <string name="btn_start"> Commencer </string>
 </resources>

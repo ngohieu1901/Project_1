@@ -1,5 +1,8 @@
 package com.example.project_1.FRAGMENT;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -8,10 +11,16 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,7 +58,8 @@ public class FragHome extends Fragment  {
 
     RecyclerView rc_file;
     HomeADAPTER adapter;
-    SearchView search_file;
+    EditText search_file;
+    ImageView iv_clear;
     ImageButton sortFile;
     LinearLayout layoutAZ, layoutZA;
     ArrayList<AllFileDTO> list = new ArrayList<>();
@@ -73,10 +83,8 @@ public class FragHome extends Fragment  {
             list = loadFiles();
             saveFile(list);
         }
-
-//        list = loadFiles();
-//        saveFile(list);
-
+        adapter = new HomeADAPTER(getContext(), list);
+        adapter.notifyDataSetChanged();
         rc_file = view.findViewById(R.id.rc_file);
         adapter = new HomeADAPTER(getContext(), list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -84,24 +92,47 @@ public class FragHome extends Fragment  {
         rc_file.setAdapter(adapter);
 
         search_file = view.findViewById(R.id.search_file_home);
-        search_file.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        iv_clear = view.findViewById(R.id.iv_clear);
+        search_file.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                adapter.getFilter().filter(query);
-                return true;
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
             @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return true;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+                if (s.length() == 0) {
+                    iv_clear.setVisibility(View.INVISIBLE);
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(search_file.getWindowToken(), 0);
+                    }
+                    search_file.clearFocus();
+                }else {
+                    iv_clear.setVisibility(View.VISIBLE);
+
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
+        iv_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search_file.setText("");
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(search_file.getWindowToken(), 0);
+                }
+                search_file.clearFocus();
+            }
+        });
         sortFile = view.findViewById(R.id.sort_file_home);
         sortFile.setOnClickListener(new View.OnClickListener() {
             boolean isChecked = false;
-
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -153,7 +184,7 @@ public class FragHome extends Fragment  {
                         Collections.sort(list, new Comparator<AllFileDTO>() {
                             @Override
                             public int compare(AllFileDTO o1, AllFileDTO o2) {
-                                return o1.getTen().compareTo(o2.getTen());
+                                return o1.getTen().toLowerCase().compareTo(o2.getTen().toLowerCase());
                             }
                         });
                         saveFile(list);
@@ -190,10 +221,11 @@ public class FragHome extends Fragment  {
         });
     }
 
+
     public class NameComparator implements Comparator<AllFileDTO> {
         @Override
         public int compare(AllFileDTO o1, AllFileDTO o2) {
-            return o2.getTen().compareTo(o1.getTen());
+            return o2.getTen().toLowerCase().compareTo(o1.getTen().toLowerCase());
         }
     }
 
@@ -226,7 +258,7 @@ public class FragHome extends Fragment  {
 
     private ArrayList<AllFileDTO> loadFiles() {
         ArrayList<AllFileDTO> list = new ArrayList<>();
-        String path = Environment.getExternalStorageDirectory().toString() + "/File/";
+        String path = Environment.getExternalStorageDirectory().toString();
         Log.d("Files", "Path: " + path);
         File directory = new File(path);
         File[] files = directory.listFiles();

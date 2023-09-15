@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ import java.util.ArrayList;
 public class HomeADAPTER extends RecyclerView.Adapter<HomeADAPTER.ViewHolder> implements Filterable {
     Context context;
     ArrayList<AllFileDTO> list_home, list_file_old, list_bookmark;
+    public boolean isActivityOpen = false;
     public HomeADAPTER(Context context, ArrayList<AllFileDTO> list) {
         this.context = context;
         this.list_home = list;
@@ -61,7 +63,6 @@ public class HomeADAPTER extends RecyclerView.Adapter<HomeADAPTER.ViewHolder> im
         holder.img_icon_file.setImageResource(allFileDTO.getHinh());
         holder.tv_ten_file.setText(allFileDTO.getTen());
         holder.tv_ngay.setText(allFileDTO.getNgay());
-
 //        if (allFileDTO.getTen().endsWith(".txt")){
 //            allFileDTO.setHinh(R.drawable.txt_icon);
 //        }else if (allFileDTO.getTen().endsWith(".docx")){
@@ -71,16 +72,25 @@ public class HomeADAPTER extends RecyclerView.Adapter<HomeADAPTER.ViewHolder> im
 //        }else if (allFileDTO.getTen().endsWith(".pptx")){
 //            allFileDTO.setHinh(R.drawable.pdf_icon);
 //        }
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String path = list_home.get(position).getPath();
-                String name = list_home.get(position).getTen();
-                Intent intent = new Intent(context, PdfViewActivity.class);
-                intent.putExtra("path", path);
-                intent.putExtra("name",name);
-                context.startActivity(intent);
+                if(!isActivityOpen){
+                    isActivityOpen = true;
+                    String path = list_home.get(position).getPath();
+                    String name = list_home.get(position).getTen();
+                    Intent intent = new Intent(context, PdfViewActivity.class);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("path", path);
+                    intent.putExtra("name", name);
+                    context.startActivity(intent);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            isActivityOpen = false;
+                        }
+                    }, 1000);
+                }
             }
         });
 
@@ -123,14 +133,14 @@ public class HomeADAPTER extends RecyclerView.Adapter<HomeADAPTER.ViewHolder> im
 
                                     File oldFile = new File(path);
                                     Log.d("ZZZZZ","Path old: "+path);
-                                    File newFile = new File("/storage/emulated/0/File/"+ed_ten.getText().toString());
-                                    Log.d("ZZZZZ","Path new: "+ "/storage/emulated/0/File/"+ed_ten.getText().toString());
+                                    File newFile = new File("/storage/emulated/0/"+ed_ten.getText().toString());
+                                    Log.d("ZZZZZ","Path new: "+ "/storage/emulated/0/"+ed_ten.getText().toString());
 
                                     if (oldFile.exists()) {
-                                        boolean success = oldFile.renameTo(new File("/storage/emulated/0/File/"+ed_ten.getText().toString()));
+                                        boolean success = oldFile.renameTo(new File("/storage/emulated/0/"+ed_ten.getText().toString()));
                                         if (success) {
                                             allFileDTO.setTen(ed_ten.getText().toString());
-                                            allFileDTO.setPath("/storage/emulated/0/File/"+ed_ten.getText().toString());
+                                            allFileDTO.setPath("/storage/emulated/0/"+ed_ten.getText().toString());
                                             list_home.set(position, allFileDTO);
                                             notifyItemChanged(position);
                                             saveFile(list_home);
@@ -145,7 +155,7 @@ public class HomeADAPTER extends RecyclerView.Adapter<HomeADAPTER.ViewHolder> im
                                             }
                                             if (fileDTO != null) {
                                                 fileDTO.setTen(ed_ten.getText().toString());
-                                                fileDTO.setPath("/storage/emulated/0/File/"+ed_ten.getText().toString());
+                                                fileDTO.setPath("/storage/emulated/0/"+ed_ten.getText().toString());
                                                 FileDATABASE.getInstance(context).fileDAO().updateFile(fileDTO);
                                             }
                                             Toast.makeText(context, context.getString(R.string.toast_rename), Toast.LENGTH_SHORT).show();
@@ -155,7 +165,6 @@ public class HomeADAPTER extends RecyclerView.Adapter<HomeADAPTER.ViewHolder> im
                                     } else {
                                         Toast.makeText(context, context.getString(R.string.toast_exists), Toast.LENGTH_SHORT).show();
                                     }
-
                                     dialog.dismiss();
                                 }
                             });
@@ -376,6 +385,7 @@ public class HomeADAPTER extends RecyclerView.Adapter<HomeADAPTER.ViewHolder> im
             bookmark_file = itemView.findViewById(R.id.bookmark_file);
             menu_custom = itemView.findViewById(R.id.menu_custom);
             container = itemView.findViewById(R.id.container);
+            tv_ten_file.setSelected(true);
         }
     }
 

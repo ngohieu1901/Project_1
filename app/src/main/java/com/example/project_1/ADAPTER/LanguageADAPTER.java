@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_1.DTO.LanguageDTO;
+import com.example.project_1.INTERFACE.ClickLanguage;
 import com.example.project_1.LanguageStatic;
 import com.example.project_1.R;
 
@@ -27,12 +30,18 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
     ArrayList<LanguageDTO> list_lang;
     int selectedPosition = -1;
     int row_index = -1;
+    private OnItemClickListener onItemClickListener;
 
-    public LanguageADAPTER(Context context, ArrayList<LanguageDTO> list_lang) {
+
+    public LanguageADAPTER(Context context, ArrayList<LanguageDTO> list_lang, OnItemClickListener clickListener) {
         this.context = context;
         this.list_lang = list_lang;
+        this.onItemClickListener = clickListener;
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
 
     @NonNull
     @Override
@@ -46,21 +55,26 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
         holder.img_hinh.setImageResource(list_lang.get(position).getHinh());
         holder.tv_ten.setText(list_lang.get(position).getTen());
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("onClick", "onClick: " + position);
                 if (position == 0){
                     LanguageStatic.setLanguage(v.getContext(),"en");
+                    onItemClickListener.onItemClick(position);
                 } else if(position == 1){
                     LanguageStatic.setLanguage(v.getContext(), "sp");
-                } else if (position == 2) {
+                    onItemClickListener.onItemClick(position);
+                } else if (position == 2){
                     Toast.makeText(context, "      Language not supported\nplease select another language", Toast.LENGTH_SHORT).show();
-                } else if (position == 3) {
+                    onItemClickListener.onItemClick(position);
+                } else if (position == 3){
+                    onItemClickListener.onItemClick(position);
                     Toast.makeText(context, "      Language not supported\nplease select another language", Toast.LENGTH_SHORT).show();
                 }
                 else if (position == 4) {
                     LanguageStatic.setLanguage(v.getContext(),"fr");
+                    onItemClickListener.onItemClick(position);
                 }
                 row_index = position;
                 selectedPosition = position;
@@ -98,4 +112,8 @@ public class LanguageADAPTER extends RecyclerView.Adapter<LanguageADAPTER.ViewHo
             layout = itemView.findViewById(R.id.frame_1);
         }
     }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
 }

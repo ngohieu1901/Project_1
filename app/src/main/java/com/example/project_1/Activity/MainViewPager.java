@@ -1,13 +1,20 @@
 package com.example.project_1.Activity;
 
+import static android.os.Build.VERSION.SDK_INT;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,18 +30,22 @@ public class MainViewPager extends AppCompatActivity {
     ViewPagerADAPTER adapter;
     TextView tv_skip;
     Button btn_next;
+    private static final int REQUEST_CODE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view_pager);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+
         tv_skip = findViewById(R.id.tv_skip);
         pager = findViewById(R.id.pager);
         indicator = findViewById(R.id.indicator);
         btn_next = findViewById(R.id.btn_next);
 
-        adapter = new ViewPagerADAPTER(getSupportFragmentManager(),FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter = new ViewPagerADAPTER(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         pager.setAdapter(adapter);
 
         indicator.setViewPager(pager);
@@ -49,10 +60,12 @@ public class MainViewPager extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pager.getCurrentItem() < 2){
+                if (pager.getCurrentItem() < 2) {
                     pager.setCurrentItem(pager.getCurrentItem() + 1);
                 } else if (pager.getCurrentItem() == 2) {
-                    Intent intent = new Intent(MainViewPager.this,LanguageActivity.class);
+                    editor.putBoolean("started", true);
+                    editor.apply();
+                    Intent intent = new Intent(MainViewPager.this, PermissionActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -67,12 +80,12 @@ public class MainViewPager extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position ==2 ){
+                if (position == 2) {
                     tv_skip.setText("");
-                    btn_next.setText("GET STARTED");
-                }else {
-                    tv_skip.setText("Skip");
-                    btn_next.setText("NEXT");
+                    btn_next.setText(R.string.btn_start);
+                } else {
+                    tv_skip.setText(R.string.tv_skip);
+                    btn_next.setText(R.string.btn_next);
                 }
             }
 
@@ -82,4 +95,13 @@ public class MainViewPager extends AppCompatActivity {
             }
         });
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_CODE){
+//            startActivity(new Intent(MainViewPager.this,MainManageFile.class));
+//            finish();
+//        }
+//    }
 }
